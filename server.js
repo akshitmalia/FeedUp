@@ -3,18 +3,16 @@ require("dotenv").config();
 const express=require("express");
 const cors=require("cors");
 const path=require("path");
-const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs")
-const User = require("./userschema");
+const User = require("./models/userschema");
+const Post = require("./models/postschema");
 const cookieParser = require("cookie-parser");
-
+const authenticate = require("./middleware/authenticate");
 const connectDB = require("./config/db");
 connectDB();
 
-
-//SECRETS Stored in .env both the secret for hte jwt and mongodb uri as well 
-
-const secret=process.env.topSecret;
+const jwt = require("jsonwebtoken");
+const secret = process.env.topSecret;
 
 
 ///////////////////////////////////// to CHANGE IT
@@ -175,18 +173,18 @@ app.post("/feedup/login", async (req, res) => {
 
 
 /////////////////////// Authenticate FUNCTION ///////////////////////
-function authenticate(req, res, next) {
-  const token = req.cookies.token;
-  if (!token) return res.redirect("/feedup/login");
+// function authenticate(req, res, next) {
+//   const token = req.cookies.token;
+//   if (!token) return res.redirect("/feedup/login");
 
-  try {
-    const decoded = jwt.verify(token, secret);
-    req.user = decoded;
-    next();
-  } catch {
-    res.redirect("/feedup/login");
-  }
-}
+//   try {
+//     const decoded = jwt.verify(token, secret);
+//     req.user = decoded;
+//     next();
+//   } catch {
+//     res.redirect("/feedup/login");
+//   }
+// }
 
 
 
