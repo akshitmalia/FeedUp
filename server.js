@@ -1,18 +1,19 @@
+require("dotenv").config();
+
 const express=require("express");
 const cors=require("cors");
 const path=require("path");
-const mongoose=require("mongoose")
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs")
 const User = require("./userschema");
 const cookieParser = require("cookie-parser");
 
-
+const connectDB = require("./config/db");
+connectDB();
 
 
 //SECRETS Stored in .env both the secret for hte jwt and mongodb uri as well 
-require("dotenv").config();
-const uri=process.env.MONGODB_URI;
+
 const secret=process.env.topSecret;
 
 
@@ -28,10 +29,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "public"))); //runs the localhost:3000/index.html
 
-// Connect to MongoDB
-mongoose.connect(uri)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("Connection error:", err));
+
 
 // route for register page
 // app.get("/feedup/register",(req,res)=>{
@@ -88,8 +86,10 @@ app.post("/feedup/register", async (req, res) => {
 
     // Step 3: set cookie instead of returning token
     res.cookie("token", token, {
-      httpOnly: true,       // not accessible via JS
-      secure: false,        // set true if using HTTPS
+      httpOnly: true,       // not accessible via JS    
+      //set true if using HTTPS
+      secure: true,
+sameSite: "Lax",
       maxAge: 24 * 60 * 60 * 1000 // 1 day
     });
 
