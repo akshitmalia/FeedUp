@@ -56,29 +56,47 @@
 </body>
 
 <script>
-  async function loginUser() {
- const email = document.getElementById("loginEmail").value;
-const password = document.getElementById("loginPassword").value;
+//   async function loginUser() {
+//  const email = document.getElementById("loginEmail").value;
+// const password = document.getElementById("loginPassword").value;
 
 
-    const res = await fetch("/feedup/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
+//     const res = await fetch("/feedup/login", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ email, password })
+//     });
 
+//     const data = await res.json();
+
+//     if (res.ok) {
+//       // Save token in localStorage
+//       // Redirect to feedup.html
+// //localStorage.setItem("token", data.token);
+// window.location.href = "/feedup";
+
+//     } else {
+//       alert(data.error || "Login failed");
+//     }
+//   }
+
+async function loginUser() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const res = await fetch("/feedup/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  if (res.ok) {
+    window.location.href = "/feedup";
+  } else {
     const data = await res.json();
-
-    if (res.ok) {
-      // Save token in localStorage
-      // Redirect to feedup.html
-//localStorage.setItem("token", data.token);
-window.location.href = "/feedup";
-
-    } else {
-      alert(data.error || "Login failed");
-    }
+    alert(data.error || "Login failed");
   }
+}
 
 //   async function goToFeedup() {
 //   const token = localStorage.getItem("token");
