@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
      <link rel="icon" type="image/png" href="favicon.png">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
     <div>
@@ -36,6 +37,9 @@
         <li class="nav-item">
           <a class="nav-link " href="#contact">Contact</a>
         </li>
+        <li class="nav-item">
+  <button type="button" onclick="signOut()" class="btn btn-outline-danger btn-sm ms-2">Sign Out</button>
+</li>
       </ul>
     </div>
   </div>
@@ -68,7 +72,7 @@
 <section id="topfeed" class="mt-4 container p-4 border border-dark rounded-3">
     <h2 class="text-center text-success fw-bold display-6">Top Feed</h2>
     <div class="mb-3 mt-4">
-        <ul id="listoffeeds" class="list-unstyled text-center">
+        <ul id="topfeedlist" class="list-unstyled text-center">
             <li style="list-style-type: none;">No Post Yet !!!</li>
         </ul>
   
@@ -76,10 +80,19 @@
    
 </section>
 
+<section id="allfeed" class="mt-4 container p-4 border border-dark rounded-3">
+    <h2 class="text-center text-primary fw-bold display-6">All Feeds</h2>
+    <div class="mb-3 mt-4">
+        <ul id="allfeedlist" class="list-unstyled text-center">
+            <li>No Posts Yet!!!</li>
+        </ul>
+    </div>
+</section>
+
 <section id="mypost" class="mt-4 container p-4 border border-dark rounded-3">
   <h2 class="text-center text-danger fw-bold display-6">My Posts</h2>
   <div class="mt-4">
-    <ul id="listoffeeds" class="list-unstyled text-center">
+    <ul id="mypostlist" class="list-unstyled text-center">
       <li>No Post by me Yet !!!</li>
     </ul>
   </div>
@@ -140,9 +153,9 @@
 
 
 </body>
-<!-- <script src="app.js">
+<script src="/app.js">
 
-</script> -->
+</script>
 
 
 </html>

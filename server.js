@@ -6,6 +6,7 @@ const path=require("path");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const feedRoutes = require("./routes/feedRoutes");
 connectDB();
 
 
@@ -31,6 +32,7 @@ app.get("/akshit/", (req, res) => {
     res.send("API is running fine.");
 });
 
+app.use("/feedup", feedRoutes);
 
 //middleware for error handling route handler
 app.use((req,res,next)=>{
