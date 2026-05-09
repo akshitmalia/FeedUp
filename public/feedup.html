@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedUp App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+    <div>
+   <nav class="navbar navbar-expand-lg  bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-primary fw-bold" href="#"><i>FeedUp</i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#topfeed">TopFeed</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#mypost">MyPOST</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#techstack">Tech Stack</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- heading and para div tag -->
+<div class="mt-4 container p-4">
+    <h1 class="text-center text-primary display-3 fw-bold">Feed_Up App</h1>
+    <p class="fs-5 mt-3 text-center text-muted">
+  FeedUp is a community-driven platform where anyone can share their thoughts 
+  and ideas anonymously. Every post can be upvoted once, helping the most 
+  valuable contributions rise to the top. Whether you want to express yourself, 
+  discover trending opinions, or explore what others are saying, FeedUp gives 
+  you a simple and secure space to connect without revealing your identity.
+</p>
+
+
+</div>
+
+
+<section id="" class="mt-4 container p-4 border border-dark rounded-3">
+    <h2 class="text-center text-primary display-6 fw-bold">Create Feed</h2>
+    <div class="mb-3 mt-4">
+  <label for="message" class="form-label text-dark fs-5 ">Enter your Post:</label>
+  <textarea class="form-control mb-3" id="message" rows="3" placeholder="Type your text here..."></textarea>
+  <button onclick="post()" class="w-100 btn btn-danger">Post</button>
+</div>
+   
+</section>
+
+<section id="topfeed" class="mt-4 container p-4 border border-dark rounded-3">
+    <h2 class="text-center text-success fw-bold display-6">Top Feed</h2>
+    <div class="mb-3 mt-4">
+        <ul id="listoffeeds" class="list-unstyled text-center">
+            <li style="list-style-type: none;">No Post Yet !!!</li>
+        </ul>
+  
+</div>
+   
+</section>
+
+<section id="mypost" class="mt-4 container p-4 border border-dark rounded-3">
+  <h2 class="text-center text-danger fw-bold display-6">My Posts</h2>
+  <div class="mt-4">
+    <ul id="listoffeeds" class="list-unstyled text-center">
+      <li>No Post by me Yet !!!</li>
+    </ul>
+  </div>
+</section>
+
+
+<section id="techstack" class="mt-4 container p-4 border border-dark rounded-3">
+  <h2 class="text-center text-secondary display-6 fw-bold">Tech Stack</h2>
+  <div class="mt-4">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item text-center">Frontend: Bootstrap</li>
+      <li class="list-group-item text-center">Styling: Tailwind CSS (optional for modern UI)</li>
+      <li class="list-group-item text-center">Backend: Node.js + Express.js</li>
+      <li class="list-group-item text-center">Database: MongoDB (Atlas) with Mongoose</li>
+      <li class="list-group-item text-center">Authentication: JWT + bcrypt</li>
+      <li class="list-group-item text-center">Real-time Features: Socket.IO</li>
+      <li class="list-group-item text-center">Deployment: Render </li>
+    </ul>
+  </div>
+</section>
+
+
+<section id="about" class="mt-4 container p-4">
+    <h2 class="text-center text-info fw-bold display-6">About FeedUp</h2>
+    <p class="fs-5 mt-3 text-center text-muted">      FeedUp is a community-driven platform designed to let people share their 
+      thoughts and ideas anonymously. Every post can be upvoted once, ensuring 
+      that the most valuable contributions rise to the top. Whether you want to express yourself freely, discover trending opinions, 
+      or explore what others are saying, FeedUp provides a simple and secure 
+      space to connect without revealing your identity. Join today to start posting, upvoting, and exploring the FeedUp community.</p>
+</section>
+
+<section id="contact" class="mt-4 mb-4 container p-4 border border-dark rounded-3">
+  <h2 class="text-center text-dark display-6 fw-bold">Contact</h2>
+  <div class="mt-4">
+    <p class="fs-5 text-center">
+      Have questions or feedback? Feel free to reach out!
+    </p>
+    <ul class="list-unstyled text-center fs-6">
+      <li><strong>Name:</strong> Akshit Malia</li>
+      <li>
+        <strong>Email:</strong> 
+        <a href="mailto:akshitmalia2005@gmail.com" class="text-primary">
+          akshitmalia2005@gmail.com
+        </a>
+      </li>
+      <li>
+        <strong>Phone:</strong> 
+        <a href="tel:8595148664" class="text-primary">
+          8595148664
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+</div>
+
+
+</body>
+<script src="app.js">
+
+</script>
+
+
+</html>
