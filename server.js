@@ -11,7 +11,7 @@ connectDB();
 
 
 ///////////////////////////////////// to CHANGE IT
-const PORT=3000 ; // later need to be changed || for render deployment
+const PORT=3000 || process.env.PORT ; // later need to be changed || for render deployment
 const app=express();
 
 app.use(express.json());
