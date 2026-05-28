@@ -78,4 +78,6 @@ const token = jwt.sign(
   }
 };
 
+
+
 module.exports = { registerUser, loginUser };

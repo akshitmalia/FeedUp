@@ -3,6 +3,8 @@ require("dotenv").config({ path: "./backend/.env" });
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const jwt = require("jsonwebtoken");
+
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -31,6 +33,19 @@ app.use("/admin", adminRoutes);
 app.get("/akshit/", (req, res) => {
   res.send("API is running fine.");
 });
+
+app.get("/feedup/me", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ error: "Not authenticated" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.topSecret);
+    res.json({ email: decoded.email, role: decoded.role });
+  } catch {
+    res.status(401).json({ error: "Invalid token" });
+  }
+});
+
 
 // Serve React frontend in production
 if (process.env.NODE_ENV === "production") {
