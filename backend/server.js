@@ -41,10 +41,12 @@ app.get("/feedup/me", (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.topSecret);
     res.json({ email: decoded.email, role: decoded.role });
-  } catch {
+  } catch (err) {
+    console.error("JWT verify failed:", err.message);
     res.status(401).json({ error: "Invalid token" });
   }
 });
+
 
 
 // Serve React frontend in production
