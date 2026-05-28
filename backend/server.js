@@ -47,6 +47,12 @@ app.get("/feedup/me", (req, res) => {
   }
 });
 
+app.use(cors({
+  origin: "https://feed-up-puce.vercel.app", // exact frontend domain
+  credentials: true
+}));
+
+
 
 
 // Serve React frontend in production
