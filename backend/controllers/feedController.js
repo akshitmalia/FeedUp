@@ -1,32 +1,30 @@
 const Feed = require("../models/postschema");
 const User = require("../models/userschema");
-
+ 
 // Create a new post
 const createPost = async (req, res) => {
   try {
     const { post } = req.body;
     if (!post) return res.status(400).json({ error: "No post provided" });
-
-    // Create new feed with userId from JWT cookie
+ 
     const newFeed = new Feed({
       post,
       userId: req.user.id
     });
     await newFeed.save();
-
-    // Also store post reference in user's posts array
+ 
     await User.findByIdAndUpdate(
       req.user.id,
       { $push: { posts: newFeed._id } }
     );
-
+ 
     res.status(201).json({ message: "Post created successfully", feed: newFeed });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Get all posts
 const getAllPosts = async (req, res) => {
   try {
@@ -36,7 +34,7 @@ const getAllPosts = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Get top posts by votes
 const getTopPosts = async (req, res) => {
   try {
@@ -48,7 +46,7 @@ const getTopPosts = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Get my posts
 const getMyPosts = async (req, res) => {
   try {
@@ -58,54 +56,49 @@ const getMyPosts = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Delete my post
 const deletePost = async (req, res) => {
   try {
     const feed = await Feed.findById(req.params.id);
     if (!feed) return res.status(404).json({ error: "Post not found" });
-
-    // Only owner can delete
+ 
     if (feed.userId.toString() !== req.user.id) {
       return res.status(403).json({ error: "Unauthorized to delete this post" });
     }
-
+ 
     await Feed.findByIdAndDelete(req.params.id);
-
-    // Remove post reference from user's posts array
+ 
     await User.findByIdAndUpdate(
       req.user.id,
       { $pull: { posts: feed._id } }
     );
-
+ 
     res.json({ message: "Post deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Upvote / undo upvote
 const upvotePost = async (req, res) => {
   try {
     const feed = await Feed.findById(req.params.id);
     if (!feed) return res.status(404).json({ error: "Post not found" });
-
-    // Cannot upvote your own post
+ 
     if (feed.userId.toString() === req.user.id) {
       return res.status(403).json({ error: "Cannot upvote your own post" });
     }
-
+ 
     const alreadyUpvoted = feed.upvotedBy.includes(req.user.id);
-
+ 
     if (alreadyUpvoted) {
-      // Undo upvote
       await Feed.findByIdAndUpdate(req.params.id, {
         $pull: { upvotedBy: req.user.id },
         $inc: { votes: -1 }
       });
       return res.json({ message: "Upvote removed" });
     } else {
-      // Add upvote
       await Feed.findByIdAndUpdate(req.params.id, {
         $push: { upvotedBy: req.user.id },
         $inc: { votes: 1 }
@@ -116,42 +109,41 @@ const upvotePost = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
+ 
 // Update my post
 const updatePost = async (req, res) => {
   try {
     const { post } = req.body;
     if (!post) return res.status(400).json({ error: "No post provided" });
-
+ 
     const feed = await Feed.findById(req.params.id);
     if (!feed) return res.status(404).json({ error: "Post not found" });
-
-    // Only owner can update
+ 
     if (feed.userId.toString() !== req.user.id) {
       return res.status(403).json({ error: "Unauthorized to update this post" });
     }
-
+ 
     const updatedFeed = await Feed.findByIdAndUpdate(
       req.params.id,
       { post },
       { new: true }
     );
-
+ 
     res.json({ message: "Post updated successfully", feed: updatedFeed });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 };
-
-// Signout
+ 
+// Signout — cookie attributes MUST match how it was set in authController
 const signOut = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "Lax"
+    secure: true,
+    sameSite: "None",
   });
-  res.json({ message: "Logged out successfully" });  // ← not redirect
+  res.json({ message: "Logged out successfully" });
 };
-
-module.exports = { createPost, getAllPosts, getTopPosts, getMyPosts,updatePost, deletePost, upvotePost, signOut };
+ 
+module.exports = { createPost, getAllPosts, getTopPosts, getMyPosts, updatePost, deletePost, upvotePost, signOut };
