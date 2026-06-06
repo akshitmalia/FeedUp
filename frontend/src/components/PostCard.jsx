@@ -8,12 +8,12 @@ export default function PostCard({
   showUpvote = true,
   editPostId,
   editText,
-  onEditStart,     // (id, currentText) => void
-  onEditChange,    // (newText) => void
-  onEditSave,      // (id) => void
-  onEditCancel,    // () => void
-  onDelete,        // (id) => void
-  onUpvote,        // (id) => void
+  onEditStart,     
+  onEditChange,    
+  onEditSave,      
+  onEditCancel,    
+  onDelete,        
+  onUpvote,        
 }) {
   const isEditing = editPostId === feed._id;
 

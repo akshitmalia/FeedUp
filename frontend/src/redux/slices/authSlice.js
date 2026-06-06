@@ -23,7 +23,7 @@ const authSlice = createSlice({
     user: null,
     isLoggedIn: false,
     role: null,
-    loading: true,  // starts true so ProtectedRoute waits before rendering
+    loading: true,  
     error: null,
   },
   reducers: {

@@ -86,7 +86,7 @@ const loginUser = async (req, res) => {
   }
 };
  
-// NEW: called on every page load to rehydrate Redux from cookie
+// called on every page load to rehydrate Redux from cookie
 const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
