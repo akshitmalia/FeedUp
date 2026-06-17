@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "major project feedUp",
   "main": "server.js",
-  "type":"commonjs",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon backend/server.js",
@@ -24,7 +24,8 @@
     "mongoose": "^9.6.2",
     "react-redux": "^9.3.0",
     "react-router-dom": "^7.15.1",
-    "recharts": "^3.8.1"
+    "recharts": "^3.8.1",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.5.0",

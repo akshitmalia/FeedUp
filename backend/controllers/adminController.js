@@ -46,36 +46,12 @@ const deleteAnyPost = async (req, res) => {
 
     await Feed.findByIdAndDelete(req.params.id);
 
-    // Remove from user's posts array
     await User.findByIdAndUpdate(
       feed.userId,
       { $pull: { posts: feed._id } }
     );
 
     res.json({ message: "Post deleted by admin" });
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
-  }
-};
-
-// Block or unblock a user
-const toggleBlockUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "User not found" });
-
-    // Cannot block another admin
-    if (user.role === "admin") {
-      return res.status(403).json({ error: "Cannot block an admin" });
-    }
-
-    user.isBlocked = !user.isBlocked;
-    await user.save();
-
-    res.json({
-      message: user.isBlocked ? "User blocked" : "User unblocked",
-      isBlocked: user.isBlocked
-    });
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
@@ -100,6 +76,5 @@ module.exports = {
   getStats,
   getAllPostsAdmin,
   deleteAnyPost,
-  toggleBlockUser,
   getUserStats
 };

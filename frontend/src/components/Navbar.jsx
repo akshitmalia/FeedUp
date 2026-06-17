@@ -22,87 +22,72 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 shadow-md sticky top-0 z-50">
-      <div className="px-4 py-3 flex items-center justify-between">
+    <nav className="bg-ink/95 backdrop-blur-md sticky top-0 z-50 border-b border-white/5">
+      <div className="px-4 py-3.5 flex items-center justify-between">
 
-        {/* Logo */}
-        <Link to={isLoggedIn ? "/home" : "/"} className="no-underline">
-          <h1 className="text-xl font-bold text-blue-500 italic">FeedUp</h1>
+        <Link to={isLoggedIn ? "/home" : "/"} className="no-underline flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-ember"></span>
+          <h1 className="font-display text-lg font-bold text-paper tracking-tight">
+            Feed<span className="text-ember">Up</span>
+          </h1>
         </Link>
 
-        {/* Desktop Nav — hidden on mobile */}
         {isLoggedIn && (
-          <div className="hidden md:flex items-center gap-5">
-            <Link to="/home" className="text-gray-300 hover:text-white transition font-medium text-sm">
-              Home
+          <div className="hidden md:flex items-center gap-6">
+            <Link to="/home" className="text-slate hover:text-paper transition font-medium text-sm">
+              Feed
             </Link>
-            <Link to="/dashboard" className="text-gray-300 hover:text-white transition font-medium text-sm">
-              Dashboard
+            <Link to="/dashboard" className="text-slate hover:text-paper transition font-medium text-sm">
+              Activity
             </Link>
             {role === "admin" && (
-              <Link to="/admin" className="text-yellow-400 hover:text-yellow-300 transition font-medium text-sm">
+              <Link to="/admin" className="text-violet hover:text-violet/70 transition font-medium text-sm">
                 Admin
               </Link>
             )}
-            {/* Email truncated so it never overflows */}
-            <span className="text-gray-400 text-xs max-w-[140px] truncate">
+            <span className="font-mono text-[11px] text-slate/70 max-w-[140px] truncate">
               {user?.email}
             </span>
             <button
               onClick={handleLogout}
-              className="px-3 py-1.5 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition text-sm"
+              className="px-4 py-1.5 bg-white/5 text-paper rounded-lg font-medium hover:bg-white/10 transition text-sm border border-white/10"
             >
-              Sign Out
+              Sign out
             </button>
           </div>
         )}
 
-        {/* Mobile hamburger — shown only on small screens */}
         {isLoggedIn && (
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white text-2xl focus:outline-none"
+            className="md:hidden text-paper text-2xl focus:outline-none leading-none"
           >
             {menuOpen ? "✕" : "☰"}
           </button>
         )}
       </div>
 
-      {/* Mobile dropdown menu */}
       {isLoggedIn && menuOpen && (
-        <div className="md:hidden bg-gray-700 px-4 py-4 flex flex-col gap-4 border-t border-gray-600">
-          {/* Truncated email at top */}
-          <span className="text-gray-400 text-xs truncate">
+        <div className="md:hidden bg-surface px-4 py-4 flex flex-col gap-4 border-t border-white/5">
+          <span className="font-mono text-[11px] text-slate truncate">
             {user?.email}
           </span>
-          <Link
-            to="/home"
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-300 hover:text-white font-medium text-sm"
-          >
-            Home
+          <Link to="/home" onClick={() => setMenuOpen(false)} className="text-paper font-medium text-sm">
+            Feed
           </Link>
-          <Link
-            to="/dashboard"
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-300 hover:text-white font-medium text-sm"
-          >
-            Dashboard
+          <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="text-paper font-medium text-sm">
+            Activity
           </Link>
           {role === "admin" && (
-            <Link
-              to="/admin"
-              onClick={() => setMenuOpen(false)}
-              className="text-yellow-400 hover:text-yellow-300 font-medium text-sm"
-            >
+            <Link to="/admin" onClick={() => setMenuOpen(false)} className="text-violet font-medium text-sm">
               Admin Panel
             </Link>
           )}
           <button
             onClick={() => { setMenuOpen(false); handleLogout(); }}
-            className="w-full py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition text-sm"
+            className="w-full py-2 bg-white/5 text-paper rounded-lg font-medium text-sm border border-white/10"
           >
-            Sign Out
+            Sign out
           </button>
         </div>
       )}

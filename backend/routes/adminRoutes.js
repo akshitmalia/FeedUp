@@ -7,7 +7,6 @@ const {
   getStats,
   getAllPostsAdmin,
   deleteAnyPost,
-  toggleBlockUser,
   getUserStats
 } = require("../controllers/adminController");
 
@@ -19,6 +18,5 @@ router.get("/stats", isAdmin, getStats);
 router.get("/users", isAdmin, getAllUsers);
 router.get("/posts", isAdmin, getAllPostsAdmin);
 router.delete("/posts/:id", isAdmin, deleteAnyPost);
-router.patch("/users/:id/block", isAdmin, toggleBlockUser);
 
 module.exports = router;
